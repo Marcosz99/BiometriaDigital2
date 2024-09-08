@@ -10,7 +10,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <exec.mainClass>aps6.biometria2.Biometria2</exec.mainClass>
+        <exec.mainClass>main.Biometria2</exec.mainClass>
     </properties>
     
     <dependencies>

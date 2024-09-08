@@ -4,18 +4,22 @@
  */
 package apresentacao;
 
+import DAL.PacienteDAO;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import modelo.Paciente;
+
 /**
  *
  * @author Alan
  */
-public class TelaCadastroPaciente extends javax.swing.JFrame
-{
+public class TelaCadastroPaciente extends javax.swing.JFrame {
 
     /**
      * Creates new form telaCadastroPessoa
      */
-    public TelaCadastroPaciente()
-    {
+    public TelaCadastroPaciente() {
         initComponents();
     }
 
@@ -33,10 +37,10 @@ public class TelaCadastroPaciente extends javax.swing.JFrame
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txfNome = new javax.swing.JTextField();
-        txfCPF = new javax.swing.JTextField();
+        txfCpf = new javax.swing.JTextField();
         txfEmail = new javax.swing.JTextField();
         txfNascimento = new javax.swing.JTextField();
-        btnBotao = new javax.swing.JButton();
+        btnBotaoCadastrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -54,7 +58,12 @@ public class TelaCadastroPaciente extends javax.swing.JFrame
             }
         });
 
-        btnBotao.setText("Cadastrar");
+        btnBotaoCadastrar.setText("Cadastrar");
+        btnBotaoCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBotaoCadastrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -67,7 +76,7 @@ public class TelaCadastroPaciente extends javax.swing.JFrame
                     .addComponent(txfNome, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txfCPF, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
+                    .addComponent(txfCpf, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
                     .addComponent(txfNascimento))
                 .addGap(31, 31, 31))
             .addGroup(layout.createSequentialGroup()
@@ -87,7 +96,7 @@ public class TelaCadastroPaciente extends javax.swing.JFrame
                 .addGap(64, 64, 64))
             .addGroup(layout.createSequentialGroup()
                 .addGap(156, 156, 156)
-                .addComponent(btnBotao)
+                .addComponent(btnBotaoCadastrar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -100,7 +109,7 @@ public class TelaCadastroPaciente extends javax.swing.JFrame
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txfCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txfCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(43, 43, 43)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -110,7 +119,7 @@ public class TelaCadastroPaciente extends javax.swing.JFrame
                     .addComponent(txfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txfNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
-                .addComponent(btnBotao)
+                .addComponent(btnBotaoCadastrar)
                 .addGap(52, 52, 52))
         );
 
@@ -122,37 +131,58 @@ public class TelaCadastroPaciente extends javax.swing.JFrame
         // TODO add your handling code here:
     }//GEN-LAST:event_txfNomeActionPerformed
 
+    private void btnBotaoCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBotaoCadastrarActionPerformed
+        List<String> listaDadosPaciente = new ArrayList<>();
+
+        listaDadosPaciente.add(txfNome.getText());
+        listaDadosPaciente.add(txfEmail.getText());
+        listaDadosPaciente.add(txfCpf.getText());
+        listaDadosPaciente.add(txfNascimento.getText());
+
+        PacienteDAO pacienteDAO = new PacienteDAO();
+
+// Verificando se o CPF já existe
+        boolean cpfExistentePaciente = pacienteDAO.verificarCpfExistente(txfCpf.getText());
+
+        if (cpfExistentePaciente) {
+            JOptionPane.showMessageDialog(null, "CPF já cadastrado para um paciente!");
+        } else {
+            Paciente paciente = new Paciente(Long.MIN_VALUE,
+                    listaDadosPaciente.get(0),
+                    listaDadosPaciente.get(1),
+                    listaDadosPaciente.get(2),
+                    listaDadosPaciente.get(3));
+
+            pacienteDAO.salvar(paciente); // Salvando no banco de dados
+
+            JOptionPane.showMessageDialog(null, "Cadastro de paciente realizado com sucesso!");
+            this.dispose();
+        }
+    }//GEN-LAST:event_btnBotaoCadastrarActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[])
-    {
+    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try
-        {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
-            {
-                if ("Nimbus".equals(info.getName()))
-                {
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex)
-        {
+        } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(TelaCadastroPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex)
-        {
+        } catch (InstantiationException ex) {
             java.util.logging.Logger.getLogger(TelaCadastroPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex)
-        {
+        } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(TelaCadastroPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex)
-        {
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(TelaCadastroPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
@@ -161,22 +191,20 @@ public class TelaCadastroPaciente extends javax.swing.JFrame
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable()
-        {
-            public void run()
-            {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
                 new TelaCadastroPaciente().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBotao;
+    private javax.swing.JButton btnBotaoCadastrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField txfCPF;
+    private javax.swing.JTextField txfCpf;
     private javax.swing.JTextField txfEmail;
     private javax.swing.JTextField txfNascimento;
     private javax.swing.JTextField txfNome;

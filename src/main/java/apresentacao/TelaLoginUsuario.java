@@ -170,7 +170,7 @@ public class TelaLoginUsuario extends javax.swing.JFrame {
         TelaLoginPaciente telaLoginPaciente = new TelaLoginPaciente();
         telaLoginPaciente.setVisible(true);
         telaLoginPaciente.setLocationRelativeTo(null);
-        telaLoginPaciente.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();
     }//GEN-LAST:event_btnTrocaTelaLoginActionPerformed
 
     /**

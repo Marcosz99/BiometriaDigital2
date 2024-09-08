@@ -31,7 +31,7 @@
               </Group>
               <EmptySpace pref="103" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="txfCPF" pref="116" max="32767" attributes="0"/>
+                  <Component id="txfCpf" pref="116" max="32767" attributes="0"/>
                   <Component id="txfNascimento" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
@@ -59,7 +59,7 @@
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="156" max="-2" attributes="0"/>
-              <Component id="btnBotao" min="-2" max="-2" attributes="0"/>
+              <Component id="btnBotaoCadastrar" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -75,7 +75,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="txfNome" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txfCPF" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txfCpf" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -88,7 +88,7 @@
                   <Component id="txfNascimento" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="56" max="32767" attributes="0"/>
-              <Component id="btnBotao" min="-2" max="-2" attributes="0"/>
+              <Component id="btnBotaoCadastrar" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -120,16 +120,19 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txfNomeActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="txfCPF">
+    <Component class="javax.swing.JTextField" name="txfCpf">
     </Component>
     <Component class="javax.swing.JTextField" name="txfEmail">
     </Component>
     <Component class="javax.swing.JTextField" name="txfNascimento">
     </Component>
-    <Component class="javax.swing.JButton" name="btnBotao">
+    <Component class="javax.swing.JButton" name="btnBotaoCadastrar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cadastrar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBotaoCadastrarActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

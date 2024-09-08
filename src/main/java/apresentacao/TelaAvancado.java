@@ -123,7 +123,7 @@ public class TelaAvancado extends javax.swing.JFrame
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnLogoutActionPerformed
     {//GEN-HEADEREND:event_btnLogoutActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_btnLogoutActionPerformed
 
     /**

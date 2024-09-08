@@ -1,4 +1,4 @@
-package aps6.biometria2;
+package main;
 
 import apresentacao.TelaLoginUsuario;
 import modelo.Usuario;

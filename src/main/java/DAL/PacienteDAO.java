@@ -2,9 +2,9 @@ package DAL;
 
 import modelo.Paciente;
 import java.util.List;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query; // Importação correta para o Hibernate 5.x e 6.x
 
 public class PacienteDAO {
 
@@ -56,6 +56,7 @@ public class PacienteDAO {
         }
     }
 
+    // Método para verificar se um paciente com o CPF existe
     public boolean verificarPacienteExistente(String cpf) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Query<Paciente> query = session.createQuery("from Paciente where cpf = :cpf", Paciente.class);
@@ -63,6 +64,20 @@ public class PacienteDAO {
             Paciente paciente = query.uniqueResult(); // Verifica se existe um único resultado
 
             return paciente != null; // Retorna true se o paciente existir, false caso contrário
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false; // Retorna false em caso de erro
+        }
+    }
+
+    // Método para verificar se um usuário com o CPF existe (corrigido)
+    public boolean verificarCpfExistente(String cpf) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Query<Paciente> query = session.createQuery("from Paciente where cpf = :cpf", Paciente.class); // Corrigido de "Usuario" para "Paciente"
+            query.setParameter("cpf", cpf);
+            Paciente paciente = query.uniqueResult(); // Verifica se existe um único resultado
+
+            return paciente != null; // Retorna true se o CPF existir, false caso contrário
         } catch (Exception e) {
             e.printStackTrace();
             return false; // Retorna false em caso de erro

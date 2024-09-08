@@ -77,6 +77,19 @@ public class UsuarioDAO {
         }
     }
 
+    public boolean verificarCpfExistente(String cpf) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Query<Usuario> query = session.createQuery("from Usuario where cpf = :cpf", Usuario.class);
+            query.setParameter("cpf", cpf);
+            Usuario usuario = query.uniqueResult(); // Verifica se existe um único resultado
+
+            return usuario != null; // Retorna true se o CPF existir, false caso contrário
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false; // Retorna false em caso de erro
+        }
+    }
+
     // Método para excluir um usuário
     public void excluir(Usuario usuario) {
         Transaction transaction = null;
