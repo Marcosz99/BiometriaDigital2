@@ -34,7 +34,7 @@ public class TelaCadastroBiometria extends javax.swing.JFrame
         btnSalvar = new javax.swing.JButton();
         btnTentarNovamente = new javax.swing.JToggleButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jpBiometria.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 

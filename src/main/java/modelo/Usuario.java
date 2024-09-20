@@ -55,6 +55,14 @@ public class Usuario {
     public Usuario() {
     }
 
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
     // Getters e Setters
     public Long getId() {
         return id;

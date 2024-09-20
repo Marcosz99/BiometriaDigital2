@@ -3,8 +3,8 @@ package modelo;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "pacientes")  // Nome da tabela no banco de dados
-public class Paciente {
+@Table(name = "medicos")  // Nome da tabela no banco de dados
+public class Medico {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)  // Gera valores automaticamente para o ID
@@ -19,16 +19,16 @@ public class Paciente {
     @Column(nullable = false)  // senhaHash é obrigatório
     private String senhaHash;
 
-    @Column(nullable = false, unique = true, length = 11)  // CPF é obrigatório e único
+    @Column(nullable = false, unique = true)  // CPF é obrigatório e único
     private String cpf;
 
     @Column(name = "data_nascimento", nullable = false)  // Data de nascimento é obrigatória
     private String dataNascimento;
 
-    public Paciente() {
+    public Medico() {
     }
 
-    public Paciente(Long id, String nome, String nomeUsuario, String senhaHash, String cpf, String dataNascimento) {
+    public Medico(Long id, String nome, String nomeUsuario, String senhaHash, String cpf, String dataNascimento ) {
         this.id = id;
         this.nome = nome;
         this.nomeUsuario = nomeUsuario;
@@ -85,4 +85,5 @@ public class Paciente {
     public void setDataNascimento(String dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
+
 }

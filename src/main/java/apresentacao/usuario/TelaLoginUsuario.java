@@ -2,12 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package apresentacao;
+package apresentacao.usuario;
 
+import apresentacao.paciente.TelaLoginPaciente;
 import javax.swing.JFrame;
 import servico.ServicoAutenticacao;
 import javax.swing.JOptionPane;
-
+import apresentacao.TelaUsuario;
 /**
  *
  * @author Alan
@@ -42,7 +43,7 @@ public class TelaLoginUsuario extends javax.swing.JFrame {
 
         jButton1.setText("Change");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Usuario");
 
         btnLogin1.setText("Login");
@@ -143,10 +144,12 @@ public class TelaLoginUsuario extends javax.swing.JFrame {
         ServicoAutenticacao servicoAutenticacao = new ServicoAutenticacao();
 
         // Valida o login
-        if (servicoAutenticacao.autenticar(nomeUsuario, senha)) {
+        if (servicoAutenticacao.autenticarUsuario(nomeUsuario, senha)) {
 
             // Sucesso no login
-            JOptionPane.showMessageDialog(this, "Login bem-sucedido!");
+            TelaUsuario telaAvancado = new TelaUsuario();
+            telaAvancado.setVisible(true);
+            telaAvancado.setLocationRelativeTo(null);
 
             // Redireciona para a próxima tela (exemplo):
             // new TelaPrincipal().setVisible(true);
@@ -164,6 +167,7 @@ public class TelaLoginUsuario extends javax.swing.JFrame {
     private void btnCadastro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastro1ActionPerformed
         TelaCadastroUsuario telaCadastroUsuario = new TelaCadastroUsuario();
         telaCadastroUsuario.setVisible(true);
+        telaCadastroUsuario.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnCadastro1ActionPerformed
 
     private void btnTrocaTelaLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrocaTelaLoginActionPerformed

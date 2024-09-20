@@ -1,6 +1,8 @@
 package main;
 
-import apresentacao.TelaLoginUsuario;
+import apresentacao.TelaUsuario;
+import apresentacao.medico.TelaLoginMedico;
+import apresentacao.usuario.TelaLoginUsuario;
 import modelo.Usuario;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -18,11 +20,15 @@ public class Biometria2 {
 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("BiometriaPersistence");
         EntityManager em = emf.createEntityManager();
-
-        TelaLoginUsuario telaLoginUsuario = new TelaLoginUsuario();
+        
+        TelaLoginMedico telaLoginUsuario = new TelaLoginMedico();
         telaLoginUsuario.setVisible(true);
         telaLoginUsuario.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         telaLoginUsuario.setLocationRelativeTo(null);
-
+        
+//        TelaLoginUsuario telaLoginUsuario2 = new TelaLoginUsuario();
+//         telaLoginUsuario2.setVisible(true);
+        
+         
     }
 }

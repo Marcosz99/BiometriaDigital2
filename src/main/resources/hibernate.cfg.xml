@@ -25,5 +25,7 @@
         <mapping class="main.Biometria2"/>
         <mapping class="modelo.Paciente"/>
         <mapping class="modelo.Usuario"/>
+        <mapping class="modelo.Registro"/>
+        <mapping class="modelo.Medico"/>
     </session-factory>
 </hibernate-configuration>

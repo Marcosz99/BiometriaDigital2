@@ -2,8 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package apresentacao;
+package apresentacao.medico;
 
+import apresentacao.paciente.TelaCadastroPaciente;
+import apresentacao.usuario.TelaCadastroUsuario;
+import apresentacao.usuario.TelaLoginUsuario;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import servico.ServicoAutenticacao;
@@ -12,12 +15,12 @@ import servico.ServicoAutenticacao;
  *
  * @author Admin
  */
-public class TelaLoginPaciente extends javax.swing.JFrame {
+public class TelaLoginMedico extends javax.swing.JFrame {
 
     /**
-     * Creates new form TelaLoginPaciente
+     * Creates new form TelaLoginMedico
      */
-    public TelaLoginPaciente() {
+    public TelaLoginMedico() {
         initComponents();
     }
 
@@ -44,7 +47,6 @@ public class TelaLoginPaciente extends javax.swing.JFrame {
         btnCadastro1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        btnTrocaTelaLogin = new javax.swing.JButton();
 
         btnLogin.setText("Login");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -73,8 +75,8 @@ public class TelaLoginPaciente extends javax.swing.JFrame {
 
         jLabel2.setText("Senha");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Paciente");
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Medico");
 
         btnLogin1.setText("Login");
         btnLogin1.addActionListener(new java.awt.event.ActionListener() {
@@ -103,13 +105,6 @@ public class TelaLoginPaciente extends javax.swing.JFrame {
 
         jLabel6.setText("Senha");
 
-        btnTrocaTelaLogin.setText("Change");
-        btnTrocaTelaLogin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTrocaTelaLoginActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -118,8 +113,7 @@ public class TelaLoginPaciente extends javax.swing.JFrame {
                 .addGap(0, 43, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnTrocaTelaLogin)
-                        .addGap(21, 21, 21)
+                        .addGap(93, 93, 93)
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
                         .addComponent(btnCadastro1))
@@ -154,7 +148,6 @@ public class TelaLoginPaciente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnTrocaTelaLogin)
                         .addComponent(btnCadastro1)
                         .addComponent(jLabel4))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -174,7 +167,7 @@ public class TelaLoginPaciente extends javax.swing.JFrame {
         ServicoAutenticacao servicoAutenticacao = new ServicoAutenticacao();
 
         // Valida o login
-        if (servicoAutenticacao.autenticar(nomeUsuario, senha)) {
+        if (servicoAutenticacao.autenticarMedico(nomeUsuario, senha)) {
 
             // Sucesso no login
             JOptionPane.showMessageDialog(this, "Login bem-sucedido!");
@@ -205,14 +198,11 @@ public class TelaLoginPaciente extends javax.swing.JFrame {
         ServicoAutenticacao servicoAutenticacao = new ServicoAutenticacao();
 
         // Valida o login
-        if (servicoAutenticacao.autenticar(nomeUsuario, senha)) {
+        if (servicoAutenticacao.autenticarMedico(nomeUsuario, senha)) {
 
-            // Sucesso no login
-            JOptionPane.showMessageDialog(this, "Login bem-sucedido!");
-
-            // Redireciona para a próxima tela (exemplo):
-            // new TelaPrincipal().setVisible(true);
-            // this.dispose();  // Fecha a tela de login
+            TelaLoginMedico telaLoginMedico = new TelaLoginMedico();
+            telaLoginMedico.setVisible(true);
+            telaLoginMedico.setLocationRelativeTo(null);
         } else {
             // Falha no login
             JOptionPane.showMessageDialog(this, "Nome de usuário ou senha inválidos.");
@@ -224,16 +214,11 @@ public class TelaLoginPaciente extends javax.swing.JFrame {
     }//GEN-LAST:event_txfSenha1ActionPerformed
 
     private void btnCadastro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastro1ActionPerformed
-        TelaCadastroPaciente telaCadastroPaciente = new TelaCadastroPaciente();
-        telaCadastroPaciente.setVisible(true);
-    }//GEN-LAST:event_btnCadastro1ActionPerformed
-
-    private void btnTrocaTelaLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrocaTelaLoginActionPerformed
-        TelaLoginUsuario telaLoginUsuario = new TelaLoginUsuario();
-        telaLoginUsuario.setVisible(true);
-        telaLoginUsuario.setLocationRelativeTo(null);
+        TelaCadastroMedico telaCadastroMedico = new TelaCadastroMedico();
+        telaCadastroMedico.setVisible(true);
+        telaCadastroMedico.setLocationRelativeTo(null);
         this.dispose();
-    }//GEN-LAST:event_btnTrocaTelaLoginActionPerformed
+    }//GEN-LAST:event_btnCadastro1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -252,20 +237,21 @@ public class TelaLoginPaciente extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaLoginPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaLoginMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaLoginPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaLoginMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaLoginPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaLoginMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaLoginPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaLoginMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaLoginPaciente().setVisible(true);
+                new TelaLoginMedico().setVisible(true);
             }
         });
     }
@@ -275,7 +261,6 @@ public class TelaLoginPaciente extends javax.swing.JFrame {
     private javax.swing.JButton btnCadastro1;
     private javax.swing.JButton btnLogin;
     private javax.swing.JButton btnLogin1;
-    private javax.swing.JButton btnTrocaTelaLogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
