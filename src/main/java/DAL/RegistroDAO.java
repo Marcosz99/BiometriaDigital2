@@ -6,6 +6,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import java.util.List;
+import javax.persistence.TypedQuery;
 
 public class RegistroDAO {
 
@@ -94,11 +95,82 @@ public class RegistroDAO {
         }
     }
 
-    /**
-     * Exclui um registro do banco de dados.
-     *
-     * @param registro O registro a ser excluído.
-     */
+    public List<Registro> buscarPorNomePaciente(String nomeCompletoPaciente) {
+        Transaction transaction = null;
+        List<Registro> registros = null;
+
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+
+            // Cria uma query para buscar registros com base no nome completo do paciente
+            TypedQuery<Registro> query = session.createQuery(
+                    "FROM Registro r WHERE r.paciente.nomeCompleto LIKE :nomeCompletoPaciente", Registro.class);
+            query.setParameter("nomeCompletoPaciente", "%" + nomeCompletoPaciente + "%"); // Usando like para busca parcial
+
+            // Obtém a lista de registros correspondentes
+            registros = query.getResultList();
+
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+        return registros;
+    }
+
+    public List<Registro> carregarPagina(int paginaAtual, int linhasPorPagina) {
+        Transaction transaction = null;
+        List<Registro> registros = null;
+
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+
+            // Calcula o offset com base na página atual e no número de linhas por página
+            int offset = (paginaAtual - 1) * linhasPorPagina;
+
+            // Cria a query para buscar os registros com paginação
+            TypedQuery<Registro> query = session.createQuery(
+                    "FROM Registro", Registro.class);
+            query.setFirstResult(offset); // Define o ponto inicial
+            query.setMaxResults(linhasPorPagina); // Define o número máximo de resultados
+
+            // Obtém a lista de registros para a página solicitada
+            registros = query.getResultList();
+
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+        return registros;
+    }
+
+    public long contarTotalRegistros() {
+        Transaction transaction = null;
+        long totalRegistros = 0;
+
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+
+            // Cria uma query para contar o total de registros
+            totalRegistros = (long) session.createQuery("SELECT COUNT(r) FROM Registro r")
+                    .uniqueResult();
+
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+
+        return totalRegistros;
+    }
+
     public void excluir(Registro registro) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {

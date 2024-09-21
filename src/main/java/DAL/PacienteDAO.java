@@ -44,10 +44,10 @@ public class PacienteDAO {
         }
     }
 
-    public Paciente buscarPorNome(String nome) {
+    public Paciente buscarPorNome(String nomeCompleto) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            Query<Paciente> query = session.createQuery("from Paciente where nome = :nome", Paciente.class);
-            query.setParameter("nome", nome);
+            Query<Paciente> query = session.createQuery("from Paciente where nomeCompleto = :nomeCompleto", Paciente.class);
+            query.setParameter("nomeCompleto", nomeCompleto);
             return query.uniqueResult(); // Retorna o objeto Paciente ou null se não encontrado
         } catch (Exception e) {
             e.printStackTrace();
@@ -66,6 +66,7 @@ public class PacienteDAO {
             return null;
         }
     }
+
 
     // Método para verificar se um paciente com o CPF existe
     public boolean verificarPacienteExistente(String cpf) {

@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 import modelo.Medico;
 import modelo.Paciente;
 import modelo.Registro;
+import servico.ServicoAutenticacao;
 
 /**
  *
@@ -74,6 +75,11 @@ public class TelaCadastroRegistro extends javax.swing.JFrame {
         txfNomePaciente.setEditable(false);
 
         txfNomeMedico.setEditable(false);
+        txfNomeMedico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txfNomeMedicoActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Medico:");
 
@@ -140,19 +146,42 @@ public class TelaCadastroRegistro extends javax.swing.JFrame {
     private void btnAdicionarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarRegistroActionPerformed
         PacienteDAO pacienteDAO = new PacienteDAO();
         MedicoDAO medicoDAO = new MedicoDAO();
+
+        // Obtém os dados do paciente e do médico dos campos de texto
+        String nomePaciente = txfNomePaciente.getText();
+        String nomeMedico = txfNomeMedico.getText();
         
-        // Obtemos os dados do paciente e do médico dos campos de texto
-        String nomePaciente = txfNomePaciente.getText().trim();
-        String nomeMedico = txfNomeMedico.getText().trim();
+        Paciente paciente = pacienteDAO.buscarPorNome(nomePaciente);
+        Medico medico = medicoDAO.buscarPorNome(nomeMedico);
 
-        // Aqui você precisa obter o CPF do paciente e do médico para associá-los no registro
-        Paciente paciente = pacienteDAO.buscarPorNome(nomePaciente); // Método que você deve implementar no PacienteDAO
-        Medico medico = medicoDAO.buscarPorNome(nomeMedico); // Método que você deve implementar no MedicoDAO
+        // Verifica se o paciente e médico foram encontrados
+        if (paciente == null) {
+            JOptionPane.showMessageDialog(this, "Paciente não encontrado.");
+            return;
+        }
+        if (medico == null) {
+            JOptionPane.showMessageDialog(this, "Médico não encontrado.");
+            return;
+        }
 
-        // Criação do novo registro
+        // Obtém o nome completo do usuário logado
+        
+
+
         Registro registro = new Registro(txfDescricao.getText(), paciente, medico);
-        
+
+        // Salva o registro no banco
+        RegistroDAO registroDAO = new RegistroDAO();
+        registroDAO.salvar(registro);
+
+        JOptionPane.showMessageDialog(this, "Registro adicionado com sucesso!");
+        this.dispose();
+
     }//GEN-LAST:event_btnAdicionarRegistroActionPerformed
+
+    private void txfNomeMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfNomeMedicoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txfNomeMedicoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -168,16 +197,24 @@ public class TelaCadastroRegistro extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastroRegistro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCadastroRegistro.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastroRegistro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCadastroRegistro.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastroRegistro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCadastroRegistro.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastroRegistro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCadastroRegistro.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 

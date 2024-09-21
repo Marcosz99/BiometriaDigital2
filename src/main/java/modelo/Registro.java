@@ -14,11 +14,11 @@ public class Registro {
     @Column(nullable = false, length = 500)
     private String descricao;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "paciente_id", nullable = false)
     private Paciente paciente;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "medico_id", nullable = false)
     private Medico medico;
 
@@ -70,8 +70,8 @@ public class Registro {
         return "Registro{" +
                 "id=" + id +
                 ", descricao='" + descricao + '\'' +
-                ", paciente=" + paciente.getNome() +
-                ", medico=" + medico.getNome() +
+                ", paciente=" + paciente.getNomeCompleto() +
+                ", medico=" + medico.getNomeCompleto()+
                 '}';
     }
 }

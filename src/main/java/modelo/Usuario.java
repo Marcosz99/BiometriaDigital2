@@ -1,27 +1,23 @@
 package modelo;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.Table;
+import javax.persistence.*;
+import util.IUsuarioLogado; // Importação correta da interface
 
 /**
- *
- * @author Admin
+ * Classe que representa um Usuário do sistema.
  */
 @Entity
 @Table(name = "usuarios") // Define o nome da tabela no banco de dados
-public class Usuario {
+public class Usuario implements IUsuarioLogado {
+
+    private String tipo = "Usuario"; // Define o tipo fixo como "Usuario"
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Define que o ID será gerado automaticamente
     private Long id;
 
-    @Column(nullable = false) // Nome é obrigatório
-    private String nome;
+    @Column(nullable = false, length = 100) // Nome completo é obrigatório
+    private String nomeCompleto; // Renomeado de 'nome' para 'nomeCompleto' para alinhar com a interface
 
     @Column(nullable = false, unique = true) // nomeUsuario é obrigatório e deve ser único
     private String nomeUsuario;
@@ -29,7 +25,7 @@ public class Usuario {
     @Column(nullable = false) // senhaHash é obrigatório
     private String senhaHash;
 
-    @Column(nullable = false) // Papel é obrigatório
+    @Column(nullable = false, unique = true, length = 11) // CPF é obrigatório e único
     private String cpf;
 
     @Column(nullable = false) // Papel é obrigatório
@@ -42,9 +38,9 @@ public class Usuario {
     private byte[] biometriaDigital;
 
     // Construtor
-    public Usuario(Long id, String nome, String nomeUsuario, String senhaHash, String cpf, String papel) {
+    public Usuario(Long id, String nomeCompleto, String nomeUsuario, String senhaHash, String cpf, String papel) {
         this.id = id;
-        this.nome = nome;
+        this.nomeCompleto = nomeCompleto;
         this.nomeUsuario = nomeUsuario;
         this.senhaHash = senhaHash;
         this.cpf = cpf;
@@ -55,16 +51,10 @@ public class Usuario {
     public Usuario() {
     }
 
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
     // Getters e Setters
-    public Long getId() {
+
+    @Override
+    public Long getId() { // Implementação do método da interface com @Override
         return id;
     }
 
@@ -72,12 +62,13 @@ public class Usuario {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    @Override
+    public String getNomeCompleto() { // Implementação do método da interface com @Override
+        return nomeCompleto;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNomeCompleto(String nomeCompleto) {
+        this.nomeCompleto = nomeCompleto;
     }
 
     public String getNomeUsuario() {
@@ -94,6 +85,14 @@ public class Usuario {
 
     public void setSenhaHash(String senhaHash) {
         this.senhaHash = senhaHash;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public String getPapel() {
@@ -119,4 +118,14 @@ public class Usuario {
     public void setBiometriaDigital(byte[] biometriaDigital) {
         this.biometriaDigital = biometriaDigital;
     }
+
+    @Override
+    public String getTipo() { // Implementação do método da interface com @Override
+        return tipo;
+    }
+
+    // Opcional: Setter para 'tipo' se necessário
+    // public void setTipo(String tipo) {
+    //     this.tipo = tipo;
+    // }
 }

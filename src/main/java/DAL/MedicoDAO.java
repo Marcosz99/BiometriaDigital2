@@ -44,10 +44,10 @@ public class MedicoDAO {
         }
     }
 
-    public Medico buscarPorNome(String nome) {
+    public Medico buscarPorNome(String nomeCompleto     ) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            Query<Medico> query = session.createQuery("from Medico where nome = :nome", Medico.class);
-            query.setParameter("nome", nome);
+            Query<Medico> query = session.createQuery("from Medico where nomeCompleto = :nomeCompleto", Medico.class);
+            query.setParameter("nomeCompleto", nomeCompleto);
             return query.uniqueResult(); // Retorna o objeto Medico ou null se não encontrado
         } catch (Exception e) {
             e.printStackTrace();

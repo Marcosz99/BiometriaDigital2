@@ -30,7 +30,7 @@ public class TelaDadosUsuario extends javax.swing.JFrame {
     }
 
     private void preencherCampos(Usuario usuario) {
-        txfNome.setText(usuario.getNome());
+        txfNome.setText(usuario.getNomeCompleto());
         txfSenha.setText(usuario.getSenhaHash());
         txfUsuario.setText(usuario.getNomeUsuario());
         txfCpf.setText(usuario.getCpf());
@@ -182,7 +182,7 @@ public class TelaDadosUsuario extends javax.swing.JFrame {
 
     private void btnSalvarAlteracoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarAlteracoesActionPerformed
         // Atualizar o objeto Usuario com os dados da tela
-        usuario.setNome(txfNome.getText());
+        usuario.setNomeCompleto(txfNome.getText());
         usuario.setSenhaHash(txfSenha.getText());
         usuario.setNomeUsuario(txfUsuario.getText());
         usuario.setCpf(txfCpf.getText());

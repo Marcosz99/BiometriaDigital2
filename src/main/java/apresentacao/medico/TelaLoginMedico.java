@@ -191,18 +191,23 @@ public class TelaLoginMedico extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCadastroActionPerformed
 
     private void btnLogin1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogin1ActionPerformed
-        String nomeUsuario = txfUsuario.getText();  // Pega o nome de usuário digitado
-        String senha = new String(txfSenha.getText());  // Pega a senha digitada
+        String nomeUsuario = txfUsuario1.getText();  // Pega o nome de usuário digitado
+        String senha = new String(txfSenha1.getText());  // Pega a senha digitada
 
         // Inicializa o serviço de autenticação
-        ServicoAutenticacao servicoAutenticacao = new ServicoAutenticacao();
-
-        // Valida o login
-        if (servicoAutenticacao.autenticarMedico(nomeUsuario, senha)) {
-
-            TelaLoginMedico telaLoginMedico = new TelaLoginMedico();
-            telaLoginMedico.setVisible(true);
-            telaLoginMedico.setLocationRelativeTo(null);
+        ServicoAutenticacao servico = new ServicoAutenticacao();
+        if (servico.autenticarUsuario("nomeUsuario", "senha")) {
+            String nomeLogado = servico.getNomeCompletoLogado();
+            System.out.println("Usuário logado: " + nomeLogado);
+        }
+        // Valida o login para usuários
+        if (servico.autenticarMedico(nomeUsuario, senha)) {
+            String nomeLogado = servico.getNomeCompletoLogado();
+            System.out.println("Médico logado: " + nomeLogado);
+            TelaMedico telaMedico = new TelaMedico();
+            telaMedico.setVisible(true);
+            telaMedico.setLocationRelativeTo(null);
+            this.dispose();
         } else {
             // Falha no login
             JOptionPane.showMessageDialog(this, "Nome de usuário ou senha inválidos.");

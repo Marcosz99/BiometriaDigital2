@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package apresentacao;
+package apresentacao.usuario;
 
 import DAL.UsuarioDAO;
 import apresentacao.usuario.TelaDadosUsuario;
@@ -58,9 +58,9 @@ public class TelaUsuario extends javax.swing.JFrame {
         btnPesquisarPorCPF = new javax.swing.JButton();
         txfCpf = new javax.swing.JTextField();
         lblCpf = new javax.swing.JLabel();
-        frmExibirGeral = new javax.swing.JFrame();
+        frmExibirGeralUsuarios = new javax.swing.JFrame();
         jTabExibirDadosLinha = new javax.swing.JScrollPane();
-        TblDados = new javax.swing.JTable();
+        TblListaDadosUsuario = new javax.swing.JTable();
         btnVoltar = new javax.swing.JButton();
         btnAvancar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -118,7 +118,7 @@ public class TelaUsuario extends javax.swing.JFrame {
                 .addGap(15, 15, 15))
         );
 
-        frmExibirGeral.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        frmExibirGeralUsuarios.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jTabExibirDadosLinha.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -126,8 +126,8 @@ public class TelaUsuario extends javax.swing.JFrame {
             }
         });
 
-        TblDados.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        TblDados.setModel(new javax.swing.table.DefaultTableModel(
+        TblListaDadosUsuario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        TblListaDadosUsuario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -162,16 +162,16 @@ public class TelaUsuario extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        TblDados.addMouseListener(new java.awt.event.MouseAdapter() {
+        TblListaDadosUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                TblDadosMouseClicked(evt);
+                TblListaDadosUsuarioMouseClicked(evt);
             }
         });
-        jTabExibirDadosLinha.setViewportView(TblDados);
-        if (TblDados.getColumnModel().getColumnCount() > 0) {
-            TblDados.getColumnModel().getColumn(0).setResizable(false);
-            TblDados.getColumnModel().getColumn(1).setResizable(false);
-            TblDados.getColumnModel().getColumn(2).setResizable(false);
+        jTabExibirDadosLinha.setViewportView(TblListaDadosUsuario);
+        if (TblListaDadosUsuario.getColumnModel().getColumnCount() > 0) {
+            TblListaDadosUsuario.getColumnModel().getColumn(0).setResizable(false);
+            TblListaDadosUsuario.getColumnModel().getColumn(1).setResizable(false);
+            TblListaDadosUsuario.getColumnModel().getColumn(2).setResizable(false);
         }
 
         btnVoltar.setText("Voltar");
@@ -199,45 +199,45 @@ public class TelaUsuario extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout frmExibirGeralLayout = new javax.swing.GroupLayout(frmExibirGeral.getContentPane());
-        frmExibirGeral.getContentPane().setLayout(frmExibirGeralLayout);
-        frmExibirGeralLayout.setHorizontalGroup(
-            frmExibirGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout frmExibirGeralUsuariosLayout = new javax.swing.GroupLayout(frmExibirGeralUsuarios.getContentPane());
+        frmExibirGeralUsuarios.getContentPane().setLayout(frmExibirGeralUsuariosLayout);
+        frmExibirGeralUsuariosLayout.setHorizontalGroup(
+            frmExibirGeralUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jTabExibirDadosLinha, javax.swing.GroupLayout.DEFAULT_SIZE, 749, Short.MAX_VALUE)
-            .addGroup(frmExibirGeralLayout.createSequentialGroup()
+            .addGroup(frmExibirGeralUsuariosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(frmExibirGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(frmExibirGeralLayout.createSequentialGroup()
+                .addGroup(frmExibirGeralUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(frmExibirGeralUsuariosLayout.createSequentialGroup()
                         .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnAvancar, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(frmExibirGeralLayout.createSequentialGroup()
+                    .addGroup(frmExibirGeralUsuariosLayout.createSequentialGroup()
                         .addComponent(txfNomePesquisado)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnPesquisarPorNome)))
                 .addContainerGap())
         );
-        frmExibirGeralLayout.setVerticalGroup(
-            frmExibirGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(frmExibirGeralLayout.createSequentialGroup()
+        frmExibirGeralUsuariosLayout.setVerticalGroup(
+            frmExibirGeralUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(frmExibirGeralUsuariosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(frmExibirGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(frmExibirGeralUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnPesquisarPorNome, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
                     .addComponent(txfNomePesquisado))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabExibirDadosLinha, javax.swing.GroupLayout.PREFERRED_SIZE, 439, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(frmExibirGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(frmExibirGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(frmExibirGeralUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(frmExibirGeralUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel1))
                     .addComponent(btnAvancar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Tela Avançada");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setSize(new java.awt.Dimension(720, 480));
@@ -329,6 +329,7 @@ public class TelaUsuario extends javax.swing.JFrame {
         if (usuario != null) {
             TelaDadosUsuario telaDados = new TelaDadosUsuario(usuario);
             telaDados.setVisible(true);
+            telaDados.setLocationRelativeTo(null);
         } else {
             // Mensagem de usuário não encontrado
             JOptionPane.showMessageDialog(this, "Usuário não encontrado");
@@ -336,11 +337,11 @@ public class TelaUsuario extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnPesquisarPorCPFActionPerformed
 
-    private void TblDadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TblDadosMouseClicked
+    private void TblListaDadosUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TblListaDadosUsuarioMouseClicked
         if (evt.getClickCount() == 2) {
-            int row = TblDados.getSelectedRow();
+            int row = TblListaDadosUsuario.getSelectedRow();
             if (row != -1) {
-                String cpf = (String) TblDados.getValueAt(row, 1);
+                String cpf = (String) TblListaDadosUsuario.getValueAt(row, 1);
                 UsuarioDAO usuarioDAO = new UsuarioDAO();
                 Usuario usuario = usuarioDAO.buscarPorCpf(cpf);
                 if (usuario != null) {
@@ -352,13 +353,13 @@ public class TelaUsuario extends javax.swing.JFrame {
             }
         }
 
-    }//GEN-LAST:event_TblDadosMouseClicked
+    }//GEN-LAST:event_TblListaDadosUsuarioMouseClicked
 
     private void JMUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMUsuarioActionPerformed
-//fafaw
-        frmExibirGeral.setVisible(true);
-        frmExibirGeral.setSize(750, 580);
-        frmExibirGeral.setLocationRelativeTo(null);
+
+        frmExibirGeralUsuarios.setVisible(true);
+        frmExibirGeralUsuarios.setSize(750, 585);
+        frmExibirGeralUsuarios.setLocationRelativeTo(null);
         carregarPagina(1, 20);
     }//GEN-LAST:event_JMUsuarioActionPerformed
 
@@ -400,12 +401,12 @@ public class TelaUsuario extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnPesquisarPorNomeActionPerformed
     public void atualizarTabela(List<Usuario> usuarios) {
-        DefaultTableModel modelo = (DefaultTableModel) TblDados.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) TblListaDadosUsuario.getModel();
         modelo.setRowCount(0); // Limpa a tabela
 
         for (Usuario usuario : usuarios) {
             modelo.addRow(new Object[]{
-                usuario.getNome(),
+                usuario.getNomeCompleto(),
                 usuario.getCpf(),
                 usuario.getNomeUsuario()
             });
@@ -413,7 +414,7 @@ public class TelaUsuario extends javax.swing.JFrame {
     }
 
     private void carregarPagina(int paginaAtual, int linhasPorPagina) {
-        DefaultTableModel modelo = (DefaultTableModel) TblDados.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) TblListaDadosUsuario.getModel();
         modelo.setRowCount(0); // Limpa a tabela antes de carregar novos dados
 
         UsuarioDAO usuarioDAO = new UsuarioDAO();
@@ -422,7 +423,7 @@ public class TelaUsuario extends javax.swing.JFrame {
         // Percorre a lista de usuários e adiciona as linhas à tabela
         for (Usuario usuario : usuarios) {
             Object[] dados = {
-                usuario.getNome(),
+                usuario.getNomeCompleto(),
                 usuario.getNomeUsuario(),
                 usuario.getCpf()
             };
@@ -452,12 +453,12 @@ public class TelaUsuario extends javax.swing.JFrame {
     private javax.swing.JMenuItem JMPacientePesquisar;
     private javax.swing.JMenuItem JMUsuario;
     private javax.swing.JMenuItem JMUsuarioPesquisar;
-    private javax.swing.JTable TblDados;
+    private javax.swing.JTable TblListaDadosUsuario;
     private javax.swing.JButton btnAvancar;
     private javax.swing.JButton btnPesquisarPorCPF;
     private javax.swing.JButton btnPesquisarPorNome;
     private javax.swing.JButton btnVoltar;
-    private javax.swing.JFrame frmExibirGeral;
+    private javax.swing.JFrame frmExibirGeralUsuarios;
     private javax.swing.JFrame frmPesquisar;
     private javax.swing.JDesktopPane jDPane;
     private javax.swing.JLabel jLabel1;

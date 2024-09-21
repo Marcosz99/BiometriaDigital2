@@ -8,7 +8,6 @@ import apresentacao.paciente.TelaLoginPaciente;
 import javax.swing.JFrame;
 import servico.ServicoAutenticacao;
 import javax.swing.JOptionPane;
-import apresentacao.TelaUsuario;
 /**
  *
  * @author Alan
